@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 const userSchema = new Schema({
-  username: {
-    type: Schema.Types.String,
-    required: true,
-    unique: true,
-  },
   userType: {
     type: Schema.Types.String,
     enum: ['Consumer', 'Publisher', 'Admin'],
@@ -32,15 +27,24 @@ const userSchema = new Schema({
     type: Schema.Types.String,
     required: true,
   },
-  gender: {
-    type: Schema.Types.String,
-    enum: ['Male', 'Female'],
-    default: 'Male',
+  address: {
+    type: Schema.Types,
+    String,
   },
-  dateOfBirth: {
-    type: Schema.Types.Date,
-    required: true,
-  },
+  balance: Schema.Types.Number,
+  phone: Schema.Types.Number,
+  boughtBooks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Book',
+    },
+  ],
+  wishList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Book',
+    },
+  ],
 });
 
 userSchema.plugin(uniqueValidator);

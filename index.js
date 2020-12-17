@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const authRouter = require('./routes/auth/api-auth');
 const userRouter = require('./routes/users/api-users');
+const bookRouter = require('./routes/book/api-book');
 const cors = require('cors');
 const passport = require('passport');
 
@@ -15,11 +16,12 @@ app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(morgan('tiny'));
+app.use('/api/book', bookRouter);
 app.use('/auth', authRouter);
 app.use('/api/users', userRouter);
 
 app.get('/', (req, res) => {
-  res.json({ message: 'hello from deglem' });
+  res.json({ message: 'hello from ebook' });
 });
 
 // connect to mongo db
